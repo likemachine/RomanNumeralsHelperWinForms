@@ -30,7 +30,7 @@ namespace RomanNumeralsHelper
                 else
                 {
                     // В случае ошибки ввода числа
-                    Label8.Text = "Invalid input. Please enter a valid number.";
+                    Label8.Text = "Введите число";
                 }
             }
 
@@ -50,7 +50,7 @@ namespace RomanNumeralsHelper
                 catch (Exception ex)
                 {
                     // В случае ошибки ввода римского числа
-                    Label9.Text = $"Error: {ex.Message}";
+                    Label9.Text = $"{ex.Message}";
                 }
             }
         }

@@ -110,7 +110,7 @@ namespace RomanNumeralsHelper
          // form
          //
             this.Size = new System.Drawing.Size(480,400);
-            this.Text =  "Form1";
+            this.Text =  "RomanNumeralsHelper";
             this.Controls.Add(this.Label0);
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.PictureBox2);

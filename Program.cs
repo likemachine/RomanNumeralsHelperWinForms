@@ -18,7 +18,7 @@ public class RomanHelper
         new NumLib { Roman = "L", Arab = 50 },
         new NumLib { Roman = "C", Arab = 100 },
         new NumLib { Roman = "D", Arab = 500 },
-        new NumLib { Roman = "M", Arab = 1000 }
+        new NumLib { Roman = "M", Arab = 1000 },
     };
 
     public string ToRoman(uint n)
@@ -37,25 +37,32 @@ public class RomanHelper
         {
             for (int i = Length - 1; i >= 0; i--)
             {
+                System.Diagnostics.Debug.WriteLine($"Index: {i}, Array Length: {Num.Length}");
                 if (parts[c] == Num[i].Arab)
                 {
                     parts[c] -= Num[i].Arab;
                     answer += Num[i].Roman;
                 }
-                else if (i > 0 && parts[c] == Num[i].Arab - Num[i - 1].Arab)
+                else if (i > 0 && i != 6 && parts[c] == Num[i + 1].Arab - Num[i - 1].Arab)
                 {
-                    parts[c] -= Num[i].Arab - Num[i - 1].Arab;
-                    answer += Num[i - 1].Roman + Num[i].Roman;
+                    parts[c] -= Num[i + 1].Arab - Num[i - 1].Arab;
+                    answer += Num[i - 1].Roman + Num[i + 1].Roman;
                 }
-                else if (parts[c] >= Num[i].Arab)
+                else if (i > 0 && i != 6 && parts[c] == Num[i + 1].Arab - Num[i].Arab)
                 {
-                    parts[c] -= Num[i].Arab;
-                    answer += Num[i].Roman;
-                    i++;  // Перескакиваем через следующий элемент, так как мы уже обработали его
+                    parts[c] -= Num[i + 1].Arab - Num[i].Arab;
+                    answer += Num[i].Roman + Num[i + 1].Roman;
+                }
+                else
+                {
+                    while (parts[c] >= Num[i].Arab) 
+                    {
+                        parts[c] -= Num[i].Arab;
+                        answer += Num[i].Roman;
+                    }
                 }
             }
         }
-
         return answer;
     }
 
@@ -75,7 +82,7 @@ public class RomanHelper
             }
         }
 
-        throw new ArgumentException("Unable to convert Roman numeral to Arabic numeral");
+        throw new ArgumentException("Ошибка записи");
     }
 
     private void SplitNumber(int number, int[] parts)
